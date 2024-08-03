@@ -1,5 +1,6 @@
 package unah.lenguajes.examen2.servicios;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class CuotasServicio {
     PrestamosRepositorio prestamosRepositorio;
 
     public List<Cuotas> crearCuotas(Prestamos prestamo) {
-        List<Cuotas> cuotas = null;
+        List<Cuotas> cuotas = new ArrayList<>();
         // Prestamos prestamo =
         // this.prestamosRepositorio.findById(codigoPrestamo).get();
 
@@ -34,7 +35,7 @@ public class CuotasServicio {
                 cuota.setInteres(0);
                 cuota.setSaldo(prestamo.getMonto());
                 saldoAnterior = prestamo.getMonto();
-                this.cuotasRepositorio.save(cuota);
+                // this.cuotasRepositorio.save(cuota);
                 cuotas.add(cuota);
             } else {
                 double interesActual;

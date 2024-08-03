@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import unah.lenguajes.examen2.modelos.Cliente;
+import unah.lenguajes.examen2.modelos.Cuotas;
 import unah.lenguajes.examen2.modelos.Prestamos;
 import unah.lenguajes.examen2.repositorios.ClienteRepositorio;
 import unah.lenguajes.examen2.repositorios.CuotasRepositorio;
@@ -43,6 +44,7 @@ public class PrestamosServicio {
             Cliente cliente = this.clienteRepositorio.findById(dni).get();
             List<Prestamos> prestamosCliente = cliente.getPrestamos();
             int cantidadPrestamosCliente = prestamosCliente.size();
+            List<Cuotas> cuotas = null;
             /*
              * for (Prestamos prestamo : prestamosCliente) {
              * cantidadPrestamosCliente++;
@@ -52,8 +54,11 @@ public class PrestamosServicio {
                 return null;
             } else {
                 // AGREGAR METODO PARA CALCULAR LA CUOTA
-                this.cuotasServicio.crearCuotas(nvoPrestamo);
-                return this.prestamosRepositorio.save(nvoPrestamo);
+
+                this.prestamosRepositorio.save(nvoPrestamo);
+                cuotas = this.cuotasServicio.crearCuotas(nvoPrestamo);
+                this.cuotasRepositorio.saveAll(cuotas);
+                return nvoPrestamo;
 
             }
         } else {

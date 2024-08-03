@@ -10,6 +10,7 @@ import unah.lenguajes.examen2.modelos.Cuotas;
 import unah.lenguajes.examen2.modelos.Prestamos;
 import unah.lenguajes.examen2.repositorios.ClienteRepositorio;
 import unah.lenguajes.examen2.repositorios.CuotasRepositorio;
+import unah.lenguajes.examen2.repositorios.PrestamosRepositorio;
 
 @Service
 public class ClienteServicio {
@@ -25,6 +26,9 @@ public class ClienteServicio {
 
     @Autowired
     CuotasRepositorio cuotasRepositorio;
+
+    @Autowired
+    PrestamosRepositorio prestamosRepositorio;
 
     public Cliente crearCliente(Cliente nvoCliente) {
 
@@ -44,6 +48,7 @@ public class ClienteServicio {
 
                     prestamo.setCuota(cuotaPrestamo);
                     prestamo.setCliente(nvoCliente);
+                    this.prestamosRepositorio.save(prestamo);
                     // cuotas = this.cuotasServicio.crearCuotas(prestamo);
                 }
 
